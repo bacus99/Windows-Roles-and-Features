@@ -62,5 +62,6 @@ The plugin's Computer tab then queries `glpi_softwares` joined to `glpi_items_so
       </en>
    </tags>
    <screenshots>
+      <screenshot><![CDATA[https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/Roles%20and%20features%20tab.png]]></screenshot>
    </screenshots>
 </root>

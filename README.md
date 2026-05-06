@@ -1,7 +1,7 @@
 # Windows Roles and Features
 
 Adds a **Windows Server Roles** tab on each Computer item in GLPI 11, listing the Windows roles and features installed on Windows Server hosts.
-![Windows Roles and Features](winserverroles/Roles and features tab.png)
+![Windows Roles and Features](![Windows Roles and Features](winserverroles/Roles%20and%20features%20)
 
 ## How it works
 

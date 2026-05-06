@@ -1,9 +1,7 @@
 # Windows Roles and Features
 
 Adds a **Windows Server Roles** tab on each Computer item in GLPI 11, listing the Windows roles and features installed on Windows Server hosts.
-
-![Roles and features tab]([Roles%20and%20features%20tab.png](https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/Roles%20and%20features%20tab.png))
-
+https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/Roles%20and%20features%20tab.png
 ## How it works
 
 1. A small Perl module (`agent/GLPI/Agent/Task/Inventory/Win32/WinServerRoles.pm`) is deployed alongside the GLPI Agent on each Windows Server.

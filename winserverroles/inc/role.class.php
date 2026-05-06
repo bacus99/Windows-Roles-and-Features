@@ -29,8 +29,14 @@ class PluginWinserverrolesRole extends CommonDBTM {
         return _n('Windows Server Role', 'Windows Server Roles', $nb, 'winserverroles');
     }
 
+    /**
+     * No backing table — the tab reads live from glpi_softwares joined to
+     * glpi_items_softwareversions.  CommonDBTM still expects a table name,
+     * so we point at glpi_softwares (the de-facto source of truth).  Search
+     * options that need glpi_items_softwareversions reference it explicitly.
+     */
     public static function getTable($classname = null): string {
-        return 'glpi_plugin_winserverroles_roles';
+        return 'glpi_softwares';
     }
 
     // -------------------------------------------------------------------------

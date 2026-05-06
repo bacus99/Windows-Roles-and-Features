@@ -7,36 +7,33 @@
  * it executes from within Migration::executeMigration() — the only allowed context.
  */
 
+/**
+ * Install creates no tables: roles are read live from glpi_softwares
+ * (entries prefixed "[WinServerRole]") joined to glpi_items_softwareversions.
+ * Only profile rights need to be registered.
+ *
+ * If a previous version of the plugin created glpi_plugin_winserverroles_roles,
+ * we drop it here so upgrades come out clean.
+ */
 function plugin_winserverroles_install(): bool {
     global $DB;
 
-    $migration  = new Migration(PLUGIN_WINSERVERROLES_VERSION);
-    $rolesTable = PluginWinserverrolesRole::getTable();
+    $migration = new Migration(PLUGIN_WINSERVERROLES_VERSION);
 
-    if (!$DB->tableExists($rolesTable)) {
-        $migration->addPostQuery(
-            "CREATE TABLE `{$rolesTable}` (
-                `id`           int unsigned NOT NULL AUTO_INCREMENT,
-                `computers_id` int unsigned  NOT NULL DEFAULT 0,
-                `name`         varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                `displayname`  varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                `description`  text         COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                `installed`    tinyint(1)   NOT NULL DEFAULT 1,
-                `subfeatures`  text         COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                `date_mod`     timestamp    NULL DEFAULT NULL,
-                PRIMARY KEY (`id`),
-                KEY `computers_id` (`computers_id`),
-                KEY `name` (`name`(100))
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
-        );
+    // Clean up the legacy roles table from pre-1.0 installations that used
+    // a custom WIN_SERVER_ROLES inventory section + pre_inventory handler.
+    $legacyTable = 'glpi_plugin_winserverroles_roles';
+    if ($DB->tableExists($legacyTable)) {
+        $migration->addPostQuery("DROP TABLE `{$legacyTable}`");
     }
 
     $migration->executeMigration();
 
-    // Register the right with every profile (0 = no access by default)
+    // Register the right with every profile (0 = no access by default).
     ProfileRight::addProfileRights([PluginWinserverrolesRole::$rightname]);
 
-    // Give the same rights as 'computer' to profiles that already have computer access
+    // Grant the same value as 'computer' to profiles that already have
+    // computer access — viewing roles is meaningless without computer read.
     $iterator = $DB->request([
         'SELECT' => ['profiles_id', 'rights'],
         'FROM'   => 'glpi_profilerights',
@@ -57,11 +54,11 @@ function plugin_winserverroles_install(): bool {
 function plugin_winserverroles_uninstall(): bool {
     global $DB;
 
-    $migration  = new Migration(PLUGIN_WINSERVERROLES_VERSION);
-    $rolesTable = PluginWinserverrolesRole::getTable();
+    $migration   = new Migration(PLUGIN_WINSERVERROLES_VERSION);
+    $legacyTable = 'glpi_plugin_winserverroles_roles';
 
-    if ($DB->tableExists($rolesTable)) {
-        $migration->addPostQuery("DROP TABLE `{$rolesTable}`");
+    if ($DB->tableExists($legacyTable)) {
+        $migration->addPostQuery("DROP TABLE `{$legacyTable}`");
     }
 
     $migration->executeMigration();

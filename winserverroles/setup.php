@@ -9,9 +9,9 @@
  *      name prefixed "[WinServerRole]" and the structured payload in COMMENTS.
  *   3. Standard GLPI inventory imports these as software entries (no custom
  *      section, no pre_inventory hook — both are unreliable in GLPI 11).
- *   4. A CLI scheduled task (PluginWinserverrolesRole::cronSyncRoles) runs
- *      hourly, scans glpi_softwares for the prefix, and syncs to the plugin's
- *      roles table.  CLI context guarantees plugin classes are loaded.
+ *   4. The Computer tab reads live from glpi_softwares joined to
+ *      glpi_items_softwareversions, filtered on the "[WinServerRole]" prefix.
+ *      No backing plugin table, no scheduled sync, no custom auth endpoint.
  */
 
 define('PLUGIN_WINSERVERROLES_VERSION', '1.0.0');
@@ -39,14 +39,9 @@ function plugin_init_winserverroles(): void {
 
     $PLUGIN_HOOKS['csrf_compliant']['winserverroles'] = true;
 
-    // Tab on Computer items.
+    // Tab on Computer items.  No other hooks needed — the tab reads live
+    // from glpi_softwares, populated by the standard inventory pipeline.
     Plugin::registerClass('PluginWinserverrolesRole', ['addtabon' => ['Computer']]);
-
-    // CronTask::register hooks (scheduled task runs in CLI context where
-    // plugin classes are autoloaded).
-    $PLUGIN_HOOKS['cron']['winserverroles'] = [
-        'syncRoles' => 3600,
-    ];
 }
 
 function plugin_version_winserverroles(): array {

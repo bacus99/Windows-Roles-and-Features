@@ -25,6 +25,10 @@ class PluginWinserverrolesRole extends CommonDBTM {
     // CommonDBTM overrides
     // -------------------------------------------------------------------------
 
+    public static function getIcon(): string {
+        return 'ti ti-server';
+    }
+
     public static function getTypeName($nb = 0): string {
         return _n('Windows Server Role', 'Windows Server Roles', $nb, 'winserverroles');
     }

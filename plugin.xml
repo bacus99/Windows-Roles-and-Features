@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
    <name>Windows Server Roles</name>
-   <key>winsrvrolesfeatures</key>
+   <key>winrolesfeatures</key>
    <state>stable</state>
-   <logo><![CDATA[https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/winsrvrolesfeatures/windows_roles_features.svg]]></logo>
+   <logo><![CDATA[https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/winrolesfeatures/windows_roles_features.svg]]></logo>
    <description>
       <short>
          <en><![CDATA[Displays Windows Server roles and features per computer, collected by GLPI Agent.]]></en>
@@ -45,7 +45,7 @@ Requirements
       <version>
          <num>1.0.0</num>
          <compatibility><![CDATA[>=11.0.6]]></compatibility>
-         <download_url><![CDATA[https://github.com/bacus99/Windows-Roles-and-Features/releases/download/Win_Roles_And_Features_v1.0/winsrvrolesfeatures-1.0.0.zip]]></download_url>
+         <download_url><![CDATA[https://github.com/bacus99/Windows-Roles-and-Features/releases/download/Win_Roles_And_Features_v1.0/winrolesfeatures-1.0.0.zip]]></download_url>
       </version>
    </versions>
    <langs>

@@ -1,0 +1,43 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Windows Server Roles 1.0.0\n"
+"POT-Creation-Date: 2026-05-01\n"
+"PO-Revision-Date: 2026-05-01\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Windows Server Role"
+msgstr "Rôle Windows Server"
+
+msgid "Windows Server Roles"
+msgstr "Rôles Windows Server"
+
+msgid "Feature name"
+msgstr "Nom de fonctionnalité"
+
+msgid "Display name"
+msgstr "Nom affiché"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Installed"
+msgstr "Installé"
+
+msgid "Sub-features"
+msgstr "Sous-fonctionnalités"
+
+msgid "Last update"
+msgstr "Dernière mise à jour"
+
+msgid "No Windows Server roles found for this computer."
+msgstr "Aucun rôle Windows Server trouvé pour cet ordinateur."
+
+msgid "Collected by GLPI Agent during standard inventory."
+msgstr "Collecté par l'agent GLPI lors de l'inventaire standard."
+
+msgid "This plugin requires GLPI >= %s and < %s"
+msgstr "Ce plugin nécessite GLPI >= %s et < %s"

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <name>Windows Server Roles</name>
+   <key>winsrvrolesfeatures</key>
+   <state>stable</state>
+   <logo><![CDATA[https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/winsrvrolesfeatures/windows_roles_features.svg]]></logo>
+   <description>
+      <short>
+         <en><![CDATA[Displays Windows Server roles and features per computer, collected by GLPI Agent.]]></en>
+      </short>
+      <long>
+         <en><![CDATA[Adds a Windows Server Roles tab on each Computer item in GLPI, listing the Windows roles and features installed on Windows Server hosts.
+
+How it works
+
+A small Perl module ships alongside the plugin and is deployed to the GLPI Agent on each Windows Server. During every standard inventory cycle the module runs Get-WindowsFeature and emits each installed role as a regular SOFTWARES entry, with the name prefixed [WinServerRole] and a structured payload (NAME, DisplayName, Installed flag, Sub-features) pipe-encoded in the COMMENTS field. No custom inventory section, no custom HTTP endpoint, no shared secrets - everything travels over the GLPI Agent's existing authenticated inventory channel.
+
+The plugin's Computer tab then queries glpi_softwares joined to glpi_items_softwareversions for entries with the [WinServerRole] prefix and renders them as a table with Name, Display Name, Installed, Sub-features and Last update columns.
+
+Features
+
+- Dedicated Windows Server Roles tab on Computer items
+- Tab counter badge shows the number of installed roles per computer
+- Search options for filtering computers by role name or last-update date
+- Compatible with GLPI 11 (uses standard inventory pipeline)
+- No custom authentication endpoint - relies entirely on the GLPI Agent's existing Basic Auth / OAuth flow
+- Marketplace-clean: no custom auth headers, no shared secrets
+
+Requirements
+
+- GLPI 11.0.6 or later
+- GLPI Agent on each Windows Server (the WinServerRoles.pm module is included in the release ZIP)
+- Windows Server 2012 R2 or later (the agent module uses the ServerManager PowerShell module)]]></en>
+      </long>
+   </description>
+   <homepage><![CDATA[https://github.com/bacus99/Windows-Roles-and-Features]]></homepage>
+   <download><![CDATA[https://github.com/bacus99/Windows-Roles-and-Features/releases]]></download>
+   <issues><![CDATA[https://github.com/bacus99/Windows-Roles-and-Features/issues]]></issues>
+   <readme><![CDATA[https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/README.md]]></readme>
+   <authors>
+      <author><![CDATA[Christian Bernard]]></author>
+   </authors>
+   <versions>
+      <version>
+         <num>1.0.0</num>
+         <compatibility><![CDATA[>=11.0.6]]></compatibility>
+         <download_url><![CDATA[https://github.com/bacus99/Windows-Roles-and-Features/releases/download/Win_Roles_And_Features_v1.0/winsrvrolesfeatures-1.0.0.zip]]></download_url>
+      </version>
+   </versions>
+   <langs>
+      <lang>en_GB</lang>
+      <lang>fr_FR</lang>
+   </langs>
+   <license><![CDATA[GPL v2+]]></license>
+   <tags>
+      <en>
+         <tag>windows</tag>
+         <tag>server roles</tag>
+         <tag>inventory</tag>
+         <tag>agent</tag>
+      </en>
+   </tags>
+   <screenshots>
+      <screenshot><![CDATA[https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/Roles%20and%20features%20tab.png]]></screenshot>
+   </screenshots>
+</root>

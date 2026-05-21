@@ -6,16 +6,16 @@
 
 include('../../../inc/includes.php');
 
-Session::checkRight(PluginWinrolesfeaturesRole::$rightname, READ);
+Session::checkRight(PluginWinserverrolesRole::$rightname, READ);
 
 Html::header(
-    PluginWinrolesfeaturesRole::getTypeName(Session::getPluralNumber()),
+    PluginWinserverrolesRole::getTypeName(Session::getPluralNumber()),
     $_SERVER['PHP_SELF'],
     'plugins',
-    'winrolesfeatures',
+    'winserverroles',
     'role'
 );
 
-Search::show('PluginWinrolesfeaturesRole');
+Search::show('PluginWinserverrolesRole');
 
 Html::footer();

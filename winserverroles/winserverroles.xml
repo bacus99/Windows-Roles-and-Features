@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <name>Windows Server Roles</name>
+   <key>winserverroles</key>
+   <state>stable</state>
+   <logo><![CDATA[https://raw.githubusercontent.com/bacus99/Windows-Roles-and-Features/main/winserverroles/windows_roles_features.svg]]></logo>
+   <description>
+      <short>
+         <en><![CDATA[Displays Windows Server roles and features per computer, collected by GLPI Agent.]]></en>
+      </short>
+   </description>
+   <homepage><![CDATA[https://github.com/bacus99/Windows-Roles-and-Features]]></homepage>
+   <authors>
+      <author><![CDATA[Christian Bernard]]></author>
+   </authors>
+   <versions>
+      <version>
+         <num>1.0.0</num>
+         <compatibility><![CDATA[>=11.0.6]]></compatibility>
+      </version>
+   </versions>
+   <langs>
+      <lang>en_GB</lang>
+      <lang>fr_FR</lang>
+   </langs>
+   <license><![CDATA[GPL v2+]]></license>
+</root>

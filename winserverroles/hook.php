@@ -12,25 +12,25 @@
  * (entries prefixed "[WinServerRole]") joined to glpi_items_softwareversions.
  * Only profile rights need to be registered.
  *
- * If a previous version of the plugin created legacy tables,
- * we drop them here so upgrades come out clean.
+ * If a previous version of the plugin created glpi_plugin_winserverroles_roles,
+ * we drop it here so upgrades come out clean.
  */
-function plugin_winrolesfeatures_install(): bool {
+function plugin_winserverroles_install(): bool {
     global $DB;
 
-    $migration = new Migration(PLUGIN_WINROLESFEATURES_VERSION);
+    $migration = new Migration(PLUGIN_WINSERVERROLES_VERSION);
 
-    // Clean up legacy tables from pre-1.0 installations.
-    foreach (['glpi_plugin_winserverroles_roles', 'glpi_plugin_winsrvrolesfeatures_roles', 'glpi_plugin_winrolesfeatures_roles'] as $legacyTable) {
-        if ($DB->tableExists($legacyTable)) {
-            $migration->addPostQuery("DROP TABLE `{$legacyTable}`");
-        }
+    // Clean up the legacy roles table from pre-1.0 installations that used
+    // a custom WIN_SERVER_ROLES inventory section + pre_inventory handler.
+    $legacyTable = 'glpi_plugin_winserverroles_roles';
+    if ($DB->tableExists($legacyTable)) {
+        $migration->addPostQuery("DROP TABLE `{$legacyTable}`");
     }
 
     $migration->executeMigration();
 
     // Register the right with every profile (0 = no access by default).
-    ProfileRight::addProfileRights([PluginWinrolesfeaturesRole::$rightname]);
+    ProfileRight::addProfileRights([PluginWinserverrolesRole::$rightname]);
 
     // Grant the same value as 'computer' to profiles that already have
     // computer access — viewing roles is meaningless without computer read.
@@ -43,7 +43,7 @@ function plugin_winrolesfeatures_install(): bool {
         if ($row['rights'] > 0) {
             $DB->update('glpi_profilerights', ['rights' => $row['rights']], [
                 'profiles_id' => $row['profiles_id'],
-                'name'        => PluginWinrolesfeaturesRole::$rightname,
+                'name'        => PluginWinserverrolesRole::$rightname,
             ]);
         }
     }
@@ -51,20 +51,19 @@ function plugin_winrolesfeatures_install(): bool {
     return true;
 }
 
-function plugin_winrolesfeatures_uninstall(): bool {
+function plugin_winserverroles_uninstall(): bool {
     global $DB;
 
-    $migration = new Migration(PLUGIN_WINROLESFEATURES_VERSION);
+    $migration   = new Migration(PLUGIN_WINSERVERROLES_VERSION);
+    $legacyTable = 'glpi_plugin_winserverroles_roles';
 
-    foreach (['glpi_plugin_winserverroles_roles', 'glpi_plugin_winsrvrolesfeatures_roles', 'glpi_plugin_winrolesfeatures_roles'] as $legacyTable) {
-        if ($DB->tableExists($legacyTable)) {
-            $migration->addPostQuery("DROP TABLE `{$legacyTable}`");
-        }
+    if ($DB->tableExists($legacyTable)) {
+        $migration->addPostQuery("DROP TABLE `{$legacyTable}`");
     }
 
     $migration->executeMigration();
 
-    ProfileRight::deleteProfileRights([PluginWinrolesfeaturesRole::$rightname]);
+    ProfileRight::deleteProfileRights([PluginWinserverrolesRole::$rightname]);
 
     return true;
 }

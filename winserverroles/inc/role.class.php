@@ -1,6 +1,6 @@
 <?php
 /**
- * PluginWinrolesfeaturesRole — Windows Server roles tab for Computer items.
+ * PluginWinserverrolesRole — Windows Server roles tab for Computer items.
  *
  * Data flow:
  *   1. GLPI Agent Perl module (Win32/WinServerRoles.pm) emits each installed
@@ -14,23 +14,19 @@
  *      setup.php during the inventory POST, so a custom section + a
  *      pre_inventory handler does not work).
  */
-class PluginWinrolesfeaturesRole extends CommonDBTM {
+class PluginWinserverrolesRole extends CommonDBTM {
 
     /** Prefix the agent module uses for software entries representing roles. */
     public const NAME_PREFIX = '[WinServerRole]';
 
-    public static $rightname = 'plugin_winrolesfeatures';
+    public static $rightname = 'plugin_winserverroles';
 
     // -------------------------------------------------------------------------
     // CommonDBTM overrides
     // -------------------------------------------------------------------------
 
-    public static function getIcon(): string {
-        return 'ti ti-server';
-    }
-
     public static function getTypeName($nb = 0): string {
-        return _n('Windows Server Role', 'Windows Server Roles', $nb, 'winrolesfeatures');
+        return _n('Windows Server Role', 'Windows Server Roles', $nb, 'winserverroles');
     }
 
     /**
@@ -138,23 +134,23 @@ class PluginWinrolesfeaturesRole extends CommonDBTM {
         $rows = iterator_to_array($iterator);
 
         echo '<div class="mb-2 text-muted small">'
-            . __('Collected by GLPI Agent during standard inventory.', 'winrolesfeatures')
+            . __('Collected by GLPI Agent during standard inventory.', 'winserverroles')
             . '</div>';
 
         if (count($rows) === 0) {
             echo '<div class="alert alert-info">'
-                . __('No Windows Server roles found for this computer.', 'winrolesfeatures')
+                . __('No Windows Server roles found for this computer.', 'winserverroles')
                 . '</div>';
             return;
         }
 
         echo '<table class="table table-hover table-striped">';
         echo '<thead class="table-dark"><tr>';
-        echo '<th>' . __('Name', 'winrolesfeatures') . '</th>';
-        echo '<th>' . __('Display Name', 'winrolesfeatures') . '</th>';
-        echo '<th>' . __('Installed', 'winrolesfeatures') . '</th>';
-        echo '<th>' . __('Sub-features', 'winrolesfeatures') . '</th>';
-        echo '<th>' . __('Last update', 'winrolesfeatures') . '</th>';
+        echo '<th>' . __('Name', 'winserverroles') . '</th>';
+        echo '<th>' . __('Display Name', 'winserverroles') . '</th>';
+        echo '<th>' . __('Installed', 'winserverroles') . '</th>';
+        echo '<th>' . __('Sub-features', 'winserverroles') . '</th>';
+        echo '<th>' . __('Last update', 'winserverroles') . '</th>';
         echo '</tr></thead><tbody>';
 
         foreach ($rows as $row) {
@@ -207,14 +203,14 @@ class PluginWinrolesfeaturesRole extends CommonDBTM {
             'id'       => 1000,
             'table'    => 'glpi_softwares',
             'field'    => 'name',
-            'name'     => __('Feature name', 'winrolesfeatures'),
+            'name'     => __('Feature name', 'winserverroles'),
             'datatype' => 'string',
         ];
         $options[] = [
             'id'       => 1002,
             'table'    => 'glpi_softwares',
             'field'    => 'date_mod',
-            'name'     => __('Last update', 'winrolesfeatures'),
+            'name'     => __('Last update', 'winserverroles'),
             'datatype' => 'datetime',
         ];
 

@@ -16,7 +16,7 @@
 
 define('PLUGIN_WINSERVERROLES_VERSION', '1.0.0');
 define('PLUGIN_WINSERVERROLES_MIN_GLPI', '11.0.0');
-define('PLUGIN_WINSERVERROLES_MAX_GLPI', '12.0.0');
+define('PLUGIN_WINSERVERROLES_MAX_GLPI', '11.0.99');
 
 // Autoload all plugin classes from inc/
 spl_autoload_register(function (string $class): void {
@@ -49,7 +49,7 @@ function plugin_version_winserverroles(): array {
         'name'         => 'Windows Server Roles and Features',
         'version'      => PLUGIN_WINSERVERROLES_VERSION,
         'author'       => 'Christian Bernard',
-        'license'      => 'GPLv2+',
+        'license'      => 'GPL-3.0-or-later',
         'homepage'     => '',
         'requirements' => [
             'glpi' => [

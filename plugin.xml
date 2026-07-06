@@ -52,7 +52,7 @@ Requirements
       <lang>en_GB</lang>
       <lang>fr_FR</lang>
    </langs>
-   <license><![CDATA[GPL v2+]]></license>
+   <license><![CDATA[GPL-3.0-or-later]]></license>
    <tags>
       <en>
          <tag>windows</tag>

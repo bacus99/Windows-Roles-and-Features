@@ -40,4 +40,4 @@ The next agent inventory cycle will start emitting the role entries; they appear
 
 ## License
 
-GPL v2+
+GPL-3.0-or-later
